@@ -1,0 +1,64 @@
+# -----------------------------------
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------------
+# Entornos
+.env
+.env.*
+
+# -----------------------------------
+# Docker
+**/docker-compose.override.yml
+**/.env.docker
+.docker/
+docker-volume-data/
+*.pid
+
+# Evita subir volúmenes persistentes montados localmente
+volumes/
+tmp/
+logs/
+data/
+
+# -----------------------------------
+# Build / Output
+dist/
+build/
+coverage/
+.cache/
+.vite/
+.next/
+out/
+
+# -----------------------------------
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# -----------------------------------
+# Linux/Mac/WSL comunes
+.DS_Store
+.cache/
+*.swp
+*~
+
+# -----------------------------------
+# IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# -----------------------------------
+# Otros
+*.log
+*.bak
+*.tmp
