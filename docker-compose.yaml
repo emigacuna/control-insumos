@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: insumosdb
+      POSTGRES_USER: insumos
+      POSTGRES_PASSWORD: insumos123
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    environment:
+      DB_HOST: db
+      DB_USER: insumos
+      DB_PASS: insumos123
+      DB_NAME: insumosdb
+    depends_on:
+      - db
+    ports:
+      - "3001:3001"
+
+  frontend:
+    build: ./frontend-nginx
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  dbdata:
