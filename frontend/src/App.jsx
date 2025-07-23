@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:3001/api/insumos";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api/insumos";
 
 function App() {
   const [insumos, setInsumos] = useState([]);
