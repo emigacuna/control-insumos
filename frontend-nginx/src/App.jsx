@@ -95,7 +95,7 @@ function App() {
 
 export default App;
 */
-
+/*
 import React, { useState, useEffect } from 'react';
 import './app.css';
 
@@ -124,10 +124,10 @@ function App() {
   }, [insumos]);
 
     const agregarInsumo = () => {
-/*    if (!nuevo.nombre || !nuevo.categoria) {
+    if (!nuevo.nombre || !nuevo.categoria) {
       alert('El nombre y la categoría son obligatorios');
       return;
-    } */
+    } 
 
     const nuevoInsumo = {
       id: Date.now(), // ID único
@@ -150,6 +150,52 @@ function App() {
   const eliminarInsumo = (id) => {
     const filtrados = insumos.filter((i) => i.id !== id);
     setInsumos(filtrados);
+  };
+*/
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './app.css';
+
+const API_URL = 'http://10.30.9.114:3001/insumos'; // Ajustá la IP si es otra
+
+function App() {
+  const [insumos, setInsumos] = useState([]);
+  const [nuevo, setNuevo] = useState({
+    nombre: '',
+    descripcion: '',
+    cantidad: 0,
+    categoria: '',
+    insumo: '',
+    serial: '',
+  });
+
+  // Obtener insumos desde el backend al iniciar
+  useEffect(() => {
+    axios.get(API_URL)
+      .then(res => setInsumos(res.data))
+      .catch(err => console.error('Error al obtener insumos:', err));
+  }, []);
+
+  const agregarInsumo = () => {
+    axios.post(API_URL, nuevo)
+      .then(res => setInsumos([...insumos, res.data]))
+      .catch(err => console.error('Error al agregar insumo:', err));
+
+    setNuevo({
+      nombre: '',
+      descripcion: '',
+      cantidad: 0,
+      categoria: '',
+      insumo: '',
+      serial: '',
+    });
+  };
+
+  const eliminarInsumo = (id) => {
+    axios.delete(`${API_URL}/${id}`)
+      .then(() => setInsumos(insumos.filter((i) => i.id !== id)))
+      .catch(err => console.error('Error al eliminar insumo:', err));
   };
 
   return (
