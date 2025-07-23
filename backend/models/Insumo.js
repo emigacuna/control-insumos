@@ -16,6 +16,12 @@ const Insumo = sequelize.define("Insumo", {
   },
   categoria: {
     type: DataTypes.STRING,
+  },
+  insumo: {
+    type: DataTypes.STRING,
+  },
+  serial: {
+    type: DataTypes.STRING,
   }
 });
 
